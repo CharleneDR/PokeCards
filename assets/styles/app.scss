@@ -1,1 +1,68 @@
+$black: #000000;
+$white: #ffffff;
+$font : 'Press Start 2P',
+cursive;
+
+$theme-colors: (
+    "black": $black,
+    "white" : $white,
+);
+
 @import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+
+// GENERAL
+
+body {
+    background-size: cover;
+    background-repeat: no;
+    background-attachment: fixed;
+    min-height: 100vh;
+
+    font: 12px $font;
+
+    #reducedDiv {
+        max-width: 890px;
+        width: 100%;
+        margin-top: 3rem;
+    }
+}
+
+// NAV BAR
+nav {
+    background-color: transparent;
+
+    img {
+        width: auto;
+        height: 150px;
+    }
+}
+
+// CARDS INDEX
+
+#search {
+    height: 400px;
+}
+
+#cardex {
+    img {
+        width: auto;
+        height: 250px;
+    }
+}
+
+
+// CARD DETAILS
+
+#cardDetails {
+    img {
+        width: auto;
+        height: 450px;
+    }
+
+    #details {
+        height: 400px;
+        width: 400px;
+    }
+}
