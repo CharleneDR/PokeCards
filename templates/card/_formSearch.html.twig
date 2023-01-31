@@ -1,0 +1,32 @@
+<div class="d-flex flex-column justify-content-center align-items-center text-center pb-4">
+	{{form_row(form.name)}}
+	<div class="w-100 d-flex flex-row justify-content-between align-items-start">
+		<div class='col-12 col-md-4 d-flex flex-column align-items-center'>
+			<a class="pt-3" href="#search_card_type" data-bs-toggle="collapse">
+				<div class="d-flex flex-row justify-content-center align-items-center">
+					{{form_label(form.type)}}
+					<img src="{{ asset('build/images/down-arrow.png') }}">
+				</div>
+			</a>
+			{{form_widget(form.type)}}
+
+		</div>
+		<div class='col-12 col-md-4 d-flex flex-column align-items-center'>
+			<a class="pt-3" href="#search_card_rarity" data-bs-toggle="collapse">
+				<div class="d-flex flex-row justify-content-center align-items-center">
+					{{form_label(form.rarity)}}<img src="{{ asset('build/images/down-arrow.png') }}">
+				</div>
+			</a>
+			{{form_widget(form.rarity)}}
+		</div>
+		<div class='col-12 col-md-4 d-flex flex-column align-items-center'>
+			<a class="pt-3" href="#search_card_series" data-bs-toggle="collapse">
+				<div class="d-flex flex-row justify-content-center align-items-center">
+					{{form_label(form.series)}}<img src="{{ asset('build/images/down-arrow.png') }}">
+				</div>
+			</a>
+			{{form_widget(form.series)}}
+		</div>
+	</div>
+	<div class="button shadow rounded-4 p-3 mt-4">Search'em all !</div>
+</div>

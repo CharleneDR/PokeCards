@@ -6,14 +6,18 @@
 {% block body %}
 	<div id='reducedDiv'>
 
-		<div id='search' class="w-100 bg-white">bbbbbbbbb</div>
+		<div id='search' class="w-100 bg-white rounded-4">
+			{% include "card/_formSearch.html.twig" %}</div>
 
-		<div id='cardex' class=" w-100 d-flex flex-row flex-wrap justify-content-center align-items-center">
-			{% for card in cards %}
-				<div class="">
-					<a href="{{ path('app_show', {id : card.id}) }}" id='{{card.id}}'><img class="mx-3 my-4" src="{{card.images.small}}" alt="card image"></a>
-				</div>
-			{% endfor %}
+		<div id='cardex' class="mb-5 w-100 d-flex flex-row flex-wrap justify-content-center align-items-center">
+			{% if cards is defined %}
+				{% for card in cards %}
+					<div class="d-flex flex-column flex-wrap justify-content-center align-items-center">
+						<a href="{{ path('app_show', {id : card.id}) }}" id='{{card.id}}'><img class="card mx-3 mt-4" src="{{card.images.small}}" alt="card image"></a>
+						<a href="#" id='{{card.id}}'><img class="pokeball mt-1 mb-3" src="{{ asset('build/images/pokeball_filled.png') }}" alt="add to collection"></a>
+					</div>
+				{% endfor %}
+			{% endif %}
 		</div>
 	</div>
 {% endblock %}

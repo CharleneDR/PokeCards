@@ -13,7 +13,15 @@
 					<h2>{{card.name}}
 					</h2>
 					<div>Type:
-						{{card.types[0]}}
+						{% if card.types|lenght == 1 %}
+							{{card.types[0]}}
+						{% else %}
+							{% for type in card.types %}
+								{{type}}
+								""
+							{% endfor %}
+						{% endif %}
+
 					</div>
 					<div>{{card.supertype}}
 					</div>

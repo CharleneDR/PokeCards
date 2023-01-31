@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\SearchCardType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
@@ -12,11 +13,13 @@ class CardController extends AbstractController
     #[Route('/', name: 'app_index')]
     public function index(HttpClientInterface $client): Response
     {
-        $response = $client->request('GET', 'https://api.pokemontcg.io/v2/cards?q=name:pikachu');
-        $cards = $response->toArray()['data'];
+        $form = $this->createForm(SearchCardType::class);
+
+        //$cards = $response->toArray()['data'];
 
         return $this->render('card/index.html.twig', [
-            'cards' => $cards
+            'form' => $form,
+            //'cards' => $cards
         ]);
     }
 

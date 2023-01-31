@@ -1,11 +1,15 @@
 $black: #000000;
 $white: #ffffff;
+$blue: #346cbc;
+$grey: lighten(black, 80%);
 $font : 'Press Start 2P',
 cursive;
 
 $theme-colors: (
     "black": $black,
     "white" : $white,
+    "blue" : $blue,
+    "grey" : $grey
 );
 
 @import "~bootstrap/scss/bootstrap";
@@ -19,6 +23,7 @@ body {
     background-repeat: no;
     background-attachment: fixed;
     min-height: 100vh;
+    color: $black;
 
     font: 12px $font;
 
@@ -26,6 +31,20 @@ body {
         max-width: 890px;
         width: 100%;
         margin-top: 3rem;
+    }
+
+    .title {
+        color: $blue;
+    }
+
+    a {
+        color: $black;
+        cursor: pointer;
+        text-decoration: none;
+
+        &:hover {
+            color: $blue;
+        }
     }
 }
 
@@ -42,13 +61,77 @@ nav {
 // CARDS INDEX
 
 #search {
-    height: 400px;
+
+    label {
+        margin-top: 2rem;
+        margin-bottom: 0.5rem;
+
+        &:hover {
+            color: $blue;
+            cursor: pointer;
+        }
+    }
+
+    .button {
+        background-color: $white;
+        border: 1px solid $grey;
+        color: $black;
+
+        &:hover {
+            background-color: $blue;
+            border-color: $blue;
+            color: $white;
+            cursor: pointer;
+        }
+    }
+
+    #search_card_type,
+    #search_card_rarity,
+    #search_card_series {
+        width: 90%;
+
+        label {
+            margin-top: 0;
+            font-size: 12px;
+            border-radius: 1rem;
+            border: 1px solid $grey;
+            display: flex;
+            flex-direction: column;
+            padding-top: 10px;
+            padding-bottom: 10px;
+
+            &:hover {
+                cursor: pointer;
+                background-color: $blue;
+                color: white;
+                border-color: $blue;
+            }
+        }
+
+        input {
+            display: none;
+        }
+    }
+
+    a {
+        img {
+            width: 15px;
+            margin-left: 0.5rem;
+            margin-top: 2rem;
+            margin-bottom: 0.5rem;
+        }
+    }
 }
 
 #cardex {
-    img {
+    .card {
         width: auto;
         height: 250px;
+    }
+
+    .pokeball {
+        width: 30px;
+        opacity: 60%;
     }
 }
 
