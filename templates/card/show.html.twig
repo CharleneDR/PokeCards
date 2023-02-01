@@ -10,10 +10,10 @@
 			<a href={{card.images.large}} id='{{card.id}}'><img class="me-4 my-4" src="{{card.images.large}}" alt="card image"></a>
 			<div id="details" class="rounded-4 bg-white ms-5 p-4 text-center d-flex flex-column justify-content-between align-items-center">
 				<div class="w-100">
-					<h2>{{card.name}}
+					<h2 class="word-wrap">{{card.name}}
 					</h2>
 					<div>Type:
-						{% if card.types|lenght == 1 %}
+						{% if card.types|length == 1 %}
 							{{card.types[0]}}
 						{% else %}
 							{% for type in card.types %}
@@ -37,10 +37,15 @@
 						{{card.rarity}}
 					{% endif %}
 					<div>Total printed:
-						{{card.set.printedTotal}}</div>
+						{{card.set.printedTotal}}
+					</div>
+					<div>Trend price:
+						{{card.cardmarket.prices.trendPrice}}
+						€
+					</div>
 				</div>
 
-				<div>Illustrator:
+				<div>Illustrator:<br>
 					{{card.artist}}</div>
 
 				<div class="w-100">

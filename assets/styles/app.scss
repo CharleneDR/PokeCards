@@ -1,6 +1,7 @@
 $black: #000000;
 $white: #ffffff;
 $blue: #346cbc;
+$red : #FB1B1B;
 $grey: lighten(black, 80%);
 $font : 'Press Start 2P',
 cursive;
@@ -9,7 +10,8 @@ $theme-colors: (
     "black": $black,
     "white" : $white,
     "blue" : $blue,
-    "grey" : $grey
+    "grey" : $grey,
+    "red": $red
 );
 
 @import "~bootstrap/scss/bootstrap";
@@ -34,7 +36,7 @@ body {
     }
 
     .title {
-        color: $blue;
+        color: $red;
     }
 
     a {
@@ -43,7 +45,7 @@ body {
         text-decoration: none;
 
         &:hover {
-            color: $blue;
+            color: $red;
         }
     }
 }
@@ -67,27 +69,27 @@ nav {
         margin-bottom: 0.5rem;
 
         &:hover {
-            color: $blue;
+            color: $red;
             cursor: pointer;
         }
     }
 
-    .button {
+    button {
         background-color: $white;
         border: 1px solid $grey;
         color: $black;
 
         &:hover {
-            background-color: $blue;
-            border-color: $blue;
+            background-color: $red;
+            border-color: $black;
             color: $white;
             cursor: pointer;
         }
     }
 
-    #search_card_type,
-    #search_card_rarity,
-    #search_card_series {
+    #search_type,
+    #search_rarity,
+    #search_series {
         width: 90%;
 
         label {
@@ -102,9 +104,9 @@ nav {
 
             &:hover {
                 cursor: pointer;
-                background-color: $blue;
+                background-color: $red;
                 color: white;
-                border-color: $blue;
+                border-color: $black;
             }
         }
 
@@ -135,6 +137,12 @@ nav {
     }
 }
 
+.checked {
+    background-color: $red;
+    border: 1px solid $black !important;
+    color: $white;
+    cursor: pointer;
+}
 
 // CARD DETAILS
 
