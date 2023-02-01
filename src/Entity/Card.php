@@ -28,7 +28,7 @@ class Card
     #[ORM\Column(length: 255)]
     private ?string $imageSmall = null;
 
-    #[ORM\Column(type: Types::ARRAY)]
+    #[ORM\Column(type: Types::ARRAY, nullable: true)]
     private array $type = [];
 
     #[ORM\Column(length: 255)]
@@ -49,7 +49,7 @@ class Card
     #[ORM\Column]
     private ?int $printedTotal = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $trendPrice = null;
 
     #[ORM\Column(length: 255, nullable: true)]
