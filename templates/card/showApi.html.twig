@@ -7,16 +7,16 @@
 {% block body %}
 	<div id='reducedDiv' class=''>
 		<div id='cardDetails' class="d-flex flex-row justify-content-center align-items-center">
-			<a href={{card.imageLarge}} id='{{card.id}}'><img class="me-4 my-4" src="{{card.imageLarge}}" alt="card image"></a>
+			<a href={{card.images.large}} id='{{card.id}}'><img class="me-4 my-4" src="{{card.images.large}}" alt="card image"></a>
 			<div id="details" class="rounded-4 bg-white ms-5 p-4 text-center d-flex flex-column justify-content-between align-items-center">
 				<div class="w-100">
 					<h2 class="word-wrap">{{card.name}}
 					</h2>
 					<div>Type:
-						{% if card.type|length == 1 %}
-							{{card.type[0]}}
+						{% if card.types|length == 1 %}
+							{{card.types[0]}}
 						{% else %}
-							{% for type in card.type %}
+							{% for type in card.types %}
 								{{type}}
 								super
 							{% endfor %}
@@ -26,8 +26,8 @@
 					<div>{{card.supertype}}
 					</div>
 					<div>
-						{{card.series}}
-						({{card.number}}/{{card.totalSet}})
+						{{card.set.series}}
+						({{card.number}}/{{card.set.total}})
 					</div>
 				</div>
 
@@ -37,10 +37,10 @@
 						{{card.rarity}}
 					{% endif %}
 					<div>Total printed:
-						{{card.printedTotal}}
+						{{card.set.printedTotal}}
 					</div>
 					<div>Trend price:
-						{{card.trendPrice}}
+						{{card.cardmarket.prices.trendPrice}}
 						€
 					</div>
 				</div>
@@ -49,6 +49,7 @@
 					{{card.artist}}</div>
 
 				<div class="w-100">
+
 					<div>See other card of
 						{{card.name}}</div>
 					<div>or</div>
@@ -58,6 +59,7 @@
 						</div>
 					{% endif %}
 				</div>
+
 
 			</div>
 		</div>

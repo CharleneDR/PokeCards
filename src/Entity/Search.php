@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SearchRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -25,6 +27,14 @@ class Search
 
     #[ORM\Column(type: Types::ARRAY, nullable: true)]
     private array $series = [];
+
+    #[ORM\ManyToMany(targetEntity: Card::class, inversedBy: 'searches')]
+    private Collection $cards;
+
+    public function __construct()
+    {
+        $this->cards = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -75,6 +85,30 @@ class Search
     public function setSeries(?array $series): self
     {
         $this->series = $series;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Card>
+     */
+    public function getCards(): Collection
+    {
+        return $this->cards;
+    }
+
+    public function addCard(Card $card): self
+    {
+        if (!$this->cards->contains($card)) {
+            $this->cards->add($card);
+        }
+
+        return $this;
+    }
+
+    public function removeCard(Card $card): self
+    {
+        $this->cards->removeElement($card);
 
         return $this;
     }
