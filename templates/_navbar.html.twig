@@ -1,5 +1,35 @@
-<nav>
-	<div class="">
+<nav class="w-100 d-none d-md-flex">
+	<div id="logo">
 		<a href="{{ path('app_index') }}"><img class="my-3" src="{{ asset('build/images/pokecards.png') }}" alt="logo PokeCards"></a>
+	</div>
+	<div class="d-flex justify-content-between align-items-center h-100 w-100 mx-5 px-5">
+		{% if app.user %}
+			<a href="{{ path('app_logout') }}">
+				<div class="links shadow rounded-4 p-1 mx-4 d-flex flex-column justify-content-center align-items-center">
+					<img class="pokeball" src="{{ asset('build/images/pokeball_filled.png') }}">
+					<div class="pt-2 px-3">
+						Log out
+					</div>
+				</div>
+			</a>
+		{% else %}
+			<a href="{{ path('app_login') }}">
+				<div class="links shadow rounded-4 p-1 mx-4 d-flex flex-column justify-content-center align-items-center">
+					<img class="pokeball" src="{{ asset('build/images/pokeball_filled.png') }}">
+					<div class="pt-2 px-3">
+						Log in
+					</div>
+				</div>
+			</a>
+		{% endif %}
+
+		{% if app.user %}
+			<a href="#">
+				<div class="links shadow rounded-4 p-1 mx-4 d-flex flex-column justify-content-center align-items-center">
+					<img class="pokeball" src="{{ asset('build/images/pokeball_filled.png') }}">
+					<div class="pt-2 px-3">My collection</div>
+				</div>
+			</a>
+		{% endif %}
 	</div>
 </nav>

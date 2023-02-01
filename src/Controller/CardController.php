@@ -33,8 +33,8 @@ class CardController extends AbstractController
             // NOT WORKING
             $searchExist = $searchRepository->findOneBy(['name' => $name, 'type' => $types, 'rarity' => $rarities, 'series' => $series]);
             if ($searchExist == false) {
-                $cards = $cardService->urlMaker($search, $name, $types, $rarities, $series);
-                $cardService->cardSaver($cards, $search);
+                $apiCards = $cardService->urlMaker($search, $name, $types, $rarities, $series);
+                $cards = $cardService->cardSaver($apiCards, $search);
             } else {
                 $cards = $searchExist->getCards();
             }            

@@ -7,7 +7,7 @@
 {% block body %}
 	<div id='reducedDiv' class=''>
 		<div id='cardDetails' class="d-flex flex-row justify-content-center align-items-center">
-			<a href={{card.imageLarge}} id='{{card.id}}'><img class="me-4 my-4" src="{{card.imageLarge}}" alt="card image"></a>
+			<a href={{card.imageLarge}} id='{{card.apiId}}'><img class="me-4 my-4 shadow" src="{{card.imageLarge}}" alt="card image"></a>
 			<div id="details" class="rounded-4 bg-white ms-5 p-4 text-center d-flex flex-column justify-content-between align-items-center">
 				<div class="w-100">
 					<h2 class="word-wrap">{{card.name}}
@@ -40,8 +40,7 @@
 						{{card.printedTotal}}
 					</div>
 					<div>Trend price:
-						{{card.trendPrice}}
-						€
+						{{card.trendPrice}}€
 					</div>
 				</div>
 

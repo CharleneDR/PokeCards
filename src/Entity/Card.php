@@ -61,9 +61,13 @@ class Card
     #[ORM\ManyToMany(targetEntity: Search::class, mappedBy: 'cards')]
     private Collection $searches;
 
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'collection')]
+    private Collection $collectors;
+
     public function __construct()
     {
         $this->searches = new ArrayCollection();
+        $this->collectors = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -261,6 +265,33 @@ class Card
     {
         if ($this->searches->removeElement($search)) {
             $search->removeCard($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getCollectors(): Collection
+    {
+        return $this->collectors;
+    }
+
+    public function addCollector(User $collector): self
+    {
+        if (!$this->collectors->contains($collector)) {
+            $this->collectors->add($collector);
+            $collector->addCollection($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCollector(User $collector): self
+    {
+        if ($this->collectors->removeElement($collector)) {
+            $collector->removeCollection($this);
         }
 
         return $this;

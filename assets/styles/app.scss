@@ -27,10 +27,10 @@ body {
     min-height: 100vh;
     color: $black;
 
-    font: 12px $font;
+    font: 14px $font;
 
     #reducedDiv {
-        max-width: 890px;
+        max-width: 900px;
         width: 100%;
         margin-top: 3rem;
     }
@@ -48,22 +48,13 @@ body {
             color: $red;
         }
     }
-}
 
-// NAV BAR
-nav {
-    background-color: transparent;
-
-    img {
-        width: auto;
-        height: 150px;
+    h2 {
+        font-size: 24px;
     }
 }
 
-// CARDS INDEX
-
-#search {
-
+@mixin form-style {
     label {
         margin-top: 2rem;
         margin-bottom: 0.5rem;
@@ -72,12 +63,6 @@ nav {
             color: $red;
             cursor: pointer;
         }
-    }
-
-    #search_name {
-        font-size: 12px;
-        text-align: center;
-        color: black;
     }
 
     button {
@@ -93,6 +78,52 @@ nav {
         }
     }
 
+    a {
+        img {
+            width: 15px;
+            margin-left: 0.5rem;
+            margin-top: 2rem;
+            margin-bottom: 0.5rem;
+        }
+    }
+}
+
+
+// NAV BAR
+nav {
+    background-color: transparent;
+    position: relative;
+    height: 180px;
+
+    #logo {
+        z-index: 3;
+        position: absolute;
+        margin: auto;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        img {
+            width: auto;
+            height: 150px;
+        }
+    }
+
+    .links {
+
+        img {
+            width: 40px;
+            height: auto;
+        }
+    }
+}
+
+
+// CARDS INDEX
+
+#search {
+    @include form-style;
+
     #search_type,
     #search_rarity,
     #search_series {
@@ -100,7 +131,7 @@ nav {
 
         label {
             margin-top: 0;
-            font-size: 12px;
+            font-size: 14px;
             border-radius: 1rem;
             border: 1px solid $grey;
             display: flex;
@@ -121,13 +152,10 @@ nav {
         }
     }
 
-    a {
-        img {
-            width: 15px;
-            margin-left: 0.5rem;
-            margin-top: 2rem;
-            margin-bottom: 0.5rem;
-        }
+    #search_name {
+        font-size: 14px;
+        text-align: center;
+        color: black;
     }
 }
 
@@ -139,7 +167,10 @@ nav {
 
     .pokeball {
         width: 30px;
-        opacity: 60%;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 }
 
@@ -148,6 +179,10 @@ nav {
     border: 1px solid $black !important;
     color: $white;
     cursor: pointer;
+}
+
+.opacity {
+    opacity: 50%;
 }
 
 // CARD DETAILS
@@ -161,5 +196,18 @@ nav {
     #details {
         height: 400px;
         width: 400px;
+    }
+}
+
+// LOGIN
+#login {
+    @include form-style;
+
+    input {
+        width: 50%;
+        min-width: 28Opx;
+        font-size: 14px;
+        text-align: center;
+        color: black;
     }
 }

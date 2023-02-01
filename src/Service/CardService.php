@@ -65,10 +65,13 @@ class CardService {
         return $cards;
     }
 
-    public function cardSaver(array $cards, Search $search): void
+    public function cardSaver(array $apiCards, Search $search): array
     {
-        foreach ($cards as $card) {
+        $cards = [];
+        foreach ($apiCards as $card) {
             $cardExist = $this->cardRepository->findOneBy(['apiId' => $card['id']]);
+            $cards[] = $cardExist;
+
             if ($cardExist == false) {
                 $newCard = new Card();
                 $newCard->setApiId($card['id']);
@@ -96,10 +99,12 @@ class CardService {
                     $newCard->setEvolvesTo($card['evolvesTo'][0]);
                 }
 
+                $cards[] = $newCard;
                 $this->cardRepository->save($newCard, true);
                 $search->addCard($newCard);
                 $this->searchRepository->save($search, true);
             }
         }
+        return $cards;
     }
 }

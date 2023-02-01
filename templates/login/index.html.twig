@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PokéCards - Log in
+{% endblock %}
+
+{% block body %}
+	<div id='reducedDiv'>
+
+		<div id='login' class="w-100 bg-white rounded-4">
+			<div class="d-flex flex-column justify-content-center align-items-center text-center pb-4 p-4">
+				<h2>Collect'em all !</h2>
+				{% if error %}
+					<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+				{% endif %}
+
+				<form action="{{ path('app_login') }}" method="post" class='w-100'>
+					<div>
+						<label for="username">Username</label>
+						<input class="form-control m-auto" type="text" id="username" name="_username" value="{{ last_username }}">
+					</div>
+
+					<div>
+						<label for="password">Password</label>
+						<input class="form-control m-auto" type="password" id="password" name="_password">
+					</div>
+
+					<input type="hidden" name="/" value="/home">
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+					<button type="submit" class="shadow rounded-4 p-3 mt-4">Log in !</button>
+				</form>
+				<a class="text-decoration-underline pt-4">
+					<div>
+						Sign in first</div>
+				</a>
+			</div>
+		</div>
+	{% endblock %}
