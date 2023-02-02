@@ -28,6 +28,7 @@ class UserFixtures extends Fixture
                 'sacha.123'
             );
             $sacha->setPassword($hashedPassword);
+            $sacha->setIsVerified(true);
             $manager->persist($sacha);
 
             $timothee = new User();
@@ -40,6 +41,7 @@ class UserFixtures extends Fixture
                 'timothee.123'
             );
             $timothee->setPassword($hashedPassword);
+            $timothee->setIsVerified(true);
             $manager->persist($timothee);
     
             $admin = new User();
@@ -52,6 +54,7 @@ class UserFixtures extends Fixture
                 'adminpassword'
             );
             $admin->setPassword($hashedPassword);
+            $admin->setIsVerified(true);
             $manager->persist($admin);
     
             $manager->flush();

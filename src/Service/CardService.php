@@ -33,7 +33,7 @@ class CardService {
             }
 
             if (!empty($types)) {
-                $url .= '(';
+                $url .= ' (';
                 foreach($types as $type) {
                     $url .= 'types:' . $type . ' or ';
                 }
@@ -42,7 +42,7 @@ class CardService {
             }
 
             if (!empty($rarities)) {
-                $url .= '(';
+                $url .= ' (';
                 foreach($rarities as $rarity) {
                     $url .= 'rarity:' . $rarity . ' or ';
                 }
@@ -53,11 +53,13 @@ class CardService {
             if (!empty($series)) {
                 $url .= '(';
                 foreach($series as $serie) {
-                    $url .= 'set.series:' . $serie . ' or ';
+                    $url .= 'set.id:' . $serie . '* or ';
                 }
                 $url = substr($url, 0, -4);
-                $url .= ') ';
+                $url .= ')';
             }
+            
+            $url .= '&orderBy=set.series';
         }
         $response = $this->client->request('GET', $url);
         $cards = $response->toArray()['data'];
@@ -102,9 +104,11 @@ class CardService {
                 $cards[] = $newCard;
                 $this->cardRepository->save($newCard, true);
                 $search->addCard($newCard);
-                $this->searchRepository->save($search, true);
+            } else {
+                $search->addCard($cardExist);
             }
         }
+        $this->searchRepository->save($search, true);
         return $cards;
     }
 }

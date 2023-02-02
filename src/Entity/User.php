@@ -41,6 +41,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $isVerified = false;
 
     #[ORM\ManyToMany(targetEntity: Card::class, inversedBy: 'collectors')]
+    #[OrderBy(["id" => "DESC"])]
     private Collection $collection;
 
     public function __construct()

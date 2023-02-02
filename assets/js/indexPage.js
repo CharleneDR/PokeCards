@@ -34,6 +34,8 @@ if (pokeballs) {
                 .then(add => {
                     if (add == true) {
                         pokeball.classList.toggle("opacity")
+                    } else {
+                        document.location.pathname = '/login'
                     }
                 })
         })
