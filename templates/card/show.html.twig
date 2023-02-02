@@ -12,8 +12,8 @@
 				<img id='{{card.apiId}}' class="pokeball mt-1 mb-3 {% if app.user and app.user.isInCollection(card) %}{% else %}opacity{% endif %}" src="{{ asset('build/images/pokeball_filled.png') }}" alt="add to collection">
 				<div class="h-100 px-2 py-4 text-center d-flex flex-column justify-content-between align-items-center p-2">
 					<div class="w-100">
-						<h2 class="word-wrap">{{card.name}}
-						</h2>
+						<h1 class="word-wrap">{{card.name}}
+						</h1>
 						<div>Type:
 							{% if card.type|length == 1 %}
 								{{card.type[0]}}
