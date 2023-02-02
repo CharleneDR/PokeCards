@@ -12,7 +12,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 
 class CardController extends AbstractController
 {
@@ -20,6 +22,11 @@ class CardController extends AbstractController
     public function index(Request $request, SearchRepository $searchRepository, CardRepository $cardRepository, CardService $cardService): Response
     {
         $form = $this->createForm(SearchType::class);
+
+        $session = $request->getSession();
+        $form->get('name')->setData($session->get('searchName'));
+        $session->remove('name');
+
         $form->handleRequest($request);
         $cards = [];
 
@@ -69,5 +76,13 @@ class CardController extends AbstractController
                 'card' => $card
             ]);
         }
+    }
+
+    #[Route('/redirectToSearch/{name}', name: 'app_redirectToSearch')]
+    public function redirectToSearch(string $name, Request $request): Response
+    {
+        $session = $request->getSession();
+        $session->set('searchName', $name);
+        return $this->redirectToRoute('app_index', [], Response::HTTP_SEE_OTHER);
     }
 }

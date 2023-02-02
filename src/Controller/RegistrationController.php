@@ -64,7 +64,7 @@ class RegistrationController extends AbstractController
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
-            $this->addFlash('blue', 'Your account has been created, verify your email before log in !');
+            $this->addFlash('blue', 'Your account has been created, verify your email before log in!');
             return $this->redirectToRoute('app_login');
         }
 

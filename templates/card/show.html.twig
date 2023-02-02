@@ -44,18 +44,24 @@
 					</div>
 				</div>
 
-				<div>Illustrator:<br>
-					{{card.artist}}</div>
+				{% if card.artist is defined %}
+					<div>Illustrator:<br>
+						{{card.artist}}</div>
+				{% endif %}
 
 				<div class="w-100">
-					<div>See other
-						{{card.name}}
-						cards</div>
+					<a href="{{ path('app_redirectToSearch', {'name' : card.name }) }}">
+						<div>See other
+							{{card.name}}
+							cards</div>
+					</a>
 					{% if card.evolvesTo is defined and card.evolvesTo is not empty %}
 						<div>or</div>
-						<div>See evolution:
-							{{card.evolvesTo}}
-						</div>
+						<a href="{{ path('app_redirectToSearch', {'name' : card.evolvesTo }) }}">
+							<div>See evolution:
+								{{card.evolvesTo}}
+							</div>
+						</a>
 					{% endif %}
 				</div>
 

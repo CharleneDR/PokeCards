@@ -6,16 +6,18 @@
 {% block body %}
 	<div id='reducedDiv'>
 		<div id='search' class="bg-white rounded-4 m-2">
-			<h2 class="text-center pt-4">Collect'em all !</h2>
+			<h2 class="text-center pt-4">Collect'em all!</h2>
 			{% include "card/_formSearch.html.twig" %}</div>
 
 		<div id='cardex' class="mb-5 w-100 d-flex flex-row flex-wrap justify-content-center align-items-center">
 			{% if cards is not null %}
 				{% for card in cards %}
-					<div class="d-flex flex-column flex-wrap justify-content-center align-items-center">
-						<a href="{{ path('app_show', {id : card.apiId}) }}" id='{{card.apiId}}'><img class="card mx-3 mt-4 shadow" src="{{card.imageSmall}}" alt="card image"></a>
-						<img id='{{card.apiId}}' class="pokeball mt-1 mb-3 {% if app.user and app.user.isInCollection(card) %}{% else %}opacity{% endif %}" src="{{ asset('build/images/pokeball_filled.png') }}" alt="add to collection">
-					</div>
+					{% if card is not null %}
+						<div class="d-flex flex-column flex-wrap justify-content-center align-items-center">
+							<a href="{{ path('app_show', {id : card.apiId}) }}" id='{{card.apiId}}'><img class="card mx-3 mt-4 shadow" src="{{card.imageSmall}}" alt="card image"></a>
+							<img id='{{card.apiId}}' class="pokeball mt-1 mb-3 {% if app.user and app.user.isInCollection(card) %}{% else %}opacity{% endif %}" src="{{ asset('build/images/pokeball_filled.png') }}" alt="add to collection">
+						</div>
+					{% endif %}
 				{% endfor %}
 			{% endif %}
 		</div>

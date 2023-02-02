@@ -45,11 +45,12 @@
 					</div>
 				</div>
 
-				<div>Illustrator:<br>
-					{{card.artist}}</div>
+				{% if card.artist is defined %}
+					<div>Illustrator:<br>
+						{{card.artist}}</div>
+				{% endif %}
 
 				<div class="w-100">
-
 					<div>See other card of
 						{{card.name}}</div>
 					<div>or</div>
