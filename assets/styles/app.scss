@@ -189,7 +189,7 @@ nav {
         }
 
         input {
-            display: initial;
+            display: none;
 
             &:checked+label {
                 background-color: $red;
