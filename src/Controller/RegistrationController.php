@@ -3,17 +3,18 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\RegistrationFormType;
 use App\Security\EmailVerifier;
+use App\Form\RegistrationFormType;
+use Symfony\Component\Mime\Address;
+use App\Service\PasswordVerification;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mime\Address;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class RegistrationController extends AbstractController
@@ -26,13 +27,26 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function register(PasswordVerification $passwordVerification, Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $enteredPassword = $form->get('plainPassword')->getData();
+            $enteredPasswordConfirmation = $form->get('plainPasswordConfirmation')->getData();
+            $errors = $passwordVerification->verifyPassword($enteredPassword, $enteredPasswordConfirmation);
+
+            if ($errors != []) {
+                return $this->render('registration/register.html.twig', [
+                    'registrationForm' => $form->createView(),
+                    'errors' => $errors,
+                ]);
+            }
+
+            $user->setRoles(['ROLE_COLLECTOR']);
+
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
@@ -50,7 +64,7 @@ class RegistrationController extends AbstractController
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
-            $this->addFlash('blue', 'Your account has been created, log in now !');
+            $this->addFlash('blue', 'Your account has been created, verify your email before log in !');
             return $this->redirectToRoute('app_login');
         }
 
@@ -73,9 +87,6 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_register');
         }
 
-        // @TODO Change the redirect on success and handle or remove the flash message in your templates
-        $this->addFlash('success', 'Your email address has been verified.');
-
-        return $this->redirectToRoute('app_register');
+        return $this->redirectToRoute('app_login');
     }
 }

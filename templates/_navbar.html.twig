@@ -6,7 +6,7 @@
 		{% if app.user %}
 			<a href="{{ path('app_logout') }}">
 				<div class="links shadow rounded-4 p-1 mx-4 d-flex flex-column justify-content-center align-items-center">
-					<img class="pokeball" src="{{ asset('build/images/pokeball_filled.png') }}">
+					<img src="{{ asset('build/images/pokeball_filled.png') }}">
 					<div class="pt-2 px-3">
 						Log out
 					</div>
@@ -15,7 +15,7 @@
 		{% else %}
 			<a href="{{ path('app_login') }}">
 				<div class="links shadow rounded-4 p-1 mx-4 d-flex flex-column justify-content-center align-items-center">
-					<img class="pokeball" src="{{ asset('build/images/pokeball_filled.png') }}">
+					<img src="{{ asset('build/images/pokeball_filled.png') }}">
 					<div class="pt-2 px-3">
 						Log in
 					</div>

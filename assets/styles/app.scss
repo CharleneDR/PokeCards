@@ -212,3 +212,27 @@ nav {
         color: black;
     }
 }
+
+// REGISTER
+#register {
+    @include form-style;
+
+    input,
+    select {
+        width: 50%;
+        min-width: 28Opx;
+        font-size: 14px;
+        text-align: center;
+        color: black;
+    }
+
+    ul {
+        list-style: none;
+        font-size: 12px;
+
+        li {
+            color: $red;
+            padding-top: 0.5rem;
+        }
+    }
+}
