@@ -39,9 +39,11 @@
 					<div>Total printed:
 						{{card.printedTotal}}
 					</div>
-					<div>Trend price:
-						{{card.trendPrice}}€
-					</div>
+					{% if card.trendPrice is defined %}
+						<div>Trend price:
+							{{card.trendPrice}}€
+						</div>
+					{% endif %}
 				</div>
 
 				{% if card.artist is defined %}

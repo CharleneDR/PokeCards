@@ -39,10 +39,12 @@
 					<div>Total printed:
 						{{card.set.printedTotal}}
 					</div>
-					<div>Trend price:
-						{{card.cardmarket.prices.trendPrice}}
-						€
-					</div>
+					{% if card.trendPrice is defined %}
+						<div>Trend price:
+							{{card.cardmarket.prices.trendPrice}}
+							€
+						</div>
+					{% endif %}
 				</div>
 
 				{% if card.artist is defined %}
@@ -51,13 +53,18 @@
 				{% endif %}
 
 				<div class="w-100">
-					<div>See other card of
-						{{card.name}}</div>
-					<div>or</div>
-					{% if card.evolvesTo is defined %}
-						<div>See evolution:
-							{{card.evolvesTo}}
-						</div>
+					<a href="{{ path('app_redirectToSearch', {'name' : card.name}) }}">
+						<div>See other
+							{{card.name}}
+							cards</div>
+					</a>
+					{% if card.evolvesTo is defined and card.evolvesTo is not empty %}
+						<div>or</div>
+						<a href="{{ path('app_redirectToSearch', {'name' : card.evolvesTo }) }}">
+							<div>See evolution:
+								{{card.evolvesTo}}
+							</div>
+						</a>
 					{% endif %}
 				</div>
 
