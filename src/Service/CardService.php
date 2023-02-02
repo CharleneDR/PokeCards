@@ -6,6 +6,7 @@ use App\Entity\Card;
 use App\Entity\Search;
 use App\Repository\CardRepository;
 use App\Repository\SearchRepository;
+use Doctrine\ORM\PersistentCollection;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class CardService
@@ -114,5 +115,15 @@ class CardService
 
         $this->searchRepository->save($search, true);
         return $cards;
+    }
+
+    public function getTotalPrice(PersistentCollection $cards): int
+    {
+        $totalPrice = 0;
+        foreach ($cards as $card) {
+            $totalPrice += $card->getTrendPrice();
+        }
+
+        return $totalPrice;
     }
 }
