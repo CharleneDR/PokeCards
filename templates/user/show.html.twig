@@ -6,20 +6,34 @@
 {% block body %}
 	<div id='reducedDiv'>
 
-		<div id='collection' class="w-100 bg-white rounded-4 m-2">
-			<div class="d-flex flex-column justify-content-center align-items-center text-center p-4">
+		<div id='collection' class="bg-white rounded-4 m-2 flex-wrap">
+			<div class="d-flex flex-column justify-content-center align-items-center text-center px-2 py-5">
 				<h2 class="mb-4 text-break">{{user.username}}</h2>
 				{% if is_granted('ROLE_ADMIN') or (app.user and app.user == user) %}
-					<div>{{user.email}}</div>
+					<div class="mb-2">{{user.email}}</div>
 				{% endif %}
 
 				<div class="mb-4">{{user.country}}</div>
-				<div>Collection size :
+				<div class="word-wrap">Collection size :
 					{{user.collection|length}}
-					cards
+					{% if user.collection|length >1 %}
+						cards
+					{% else %}
+						card
+					{% endif %}
 				</div>
 			</div>
+			{% if is_granted('ROLE_ADMIN') or (app.user and app.user == user) %}
+				<a href="{{ path('app_user_edit', {'id': user.id}) }}"><img id="editIcon" src="{{ asset('build/images/edit.png') }}"></a>
+			{% endif %}
 		</div>
+
+		{% if(is_granted('ROLE_ADMIN')) %}
+			<div class='text-center mt-4'>
+				<a href="{{ path('app_user_index') }}">Back to list</a>
+				{{ include('user/_delete_form.html.twig') }}
+			</div>
+		{% endif %}
 
 		<div id='cardex' class="mb-5 w-100 d-flex flex-row flex-wrap justify-content-center align-items-center">
 			{% if user.collection is defined %}
@@ -32,9 +46,5 @@
 			{% endif %}
 		</div>
 	</div>
-	{% if(is_granted('ROLE_ADMIN')) %}
-		<a href="{{ path('app_user_index') }}">Back to list</a>
-		<a href="{{ path('app_user_edit', {'id': user.id}) }}">Edit</a>
-		{{ include('user/_delete_form.html.twig') }}
-	{% endif %}
+
 {% endblock %}

@@ -21,7 +21,7 @@ class UserFixtures extends Fixture
             $sacha = new User();
             $sacha->setUsername('SachaDuBourgPalette');
             $sacha->setEmail('sacha@gmail.com');
-            $sacha->setCountry('Japon');
+            $sacha->setCountry('JP');
             $sacha->setRoles(['ROLE_COLLECTOR']);
             $hashedPassword = $this->passwordHasher->hashPassword(
                 $sacha,
@@ -34,7 +34,7 @@ class UserFixtures extends Fixture
             $timothee = new User();
             $timothee->setUsername('TimDu69');
             $timothee->setEmail('timothee@gmail.com');
-            $timothee->setCountry('France');
+            $timothee->setCountry('FR');
             $timothee->setRoles(['ROLE_COLLECTOR']);
             $hashedPassword = $this->passwordHasher->hashPassword(
                 $timothee,
@@ -45,13 +45,13 @@ class UserFixtures extends Fixture
             $manager->persist($timothee);
     
             $admin = new User();
-            $admin->setUsername('admin_salameche');
-            $admin->setEmail('admin_salameche@pokecards.com');
-            $admin->setCountry('France');
+            $admin->setUsername('admin');
+            $admin->setEmail('admin@pokecards.com');
+            $admin->setCountry('FR');
             $admin->setRoles(['ROLE_ADMIN', 'ROLE_COLLECTOR']);
             $hashedPassword = $this->passwordHasher->hashPassword(
                 $admin,
-                'adminpassword'
+                'admin.123'
             );
             $admin->setPassword($hashedPassword);
             $admin->setIsVerified(true);
