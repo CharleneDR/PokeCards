@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Service\CardService;
 use App\Repository\CardRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,12 +44,14 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
-    public function show(User $user): Response
+    public function show(User $user, CardService $cardService): Response
     {
-        
+        $cards = $user->getCollection();
+        $priceCollection = $cardService->getTotalPrice($cards);
 
         return $this->render('user/show.html.twig', [
             'user' => $user,
+            'priceCollection' => $priceCollection
         ]);
     }
 
