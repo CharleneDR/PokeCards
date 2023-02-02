@@ -42,6 +42,9 @@ class UserFixtures extends Fixture
             );
             $timothee->setPassword($hashedPassword);
             $timothee->setIsVerified(true);
+            $timothee->addCollection($this->getReference('pop6-9'));
+            $timothee->addCollection($this->getReference('dp7-103'));
+            $timothee->addCollection($this->getReference('dpp-DP45'));
             $manager->persist($timothee);
     
             $admin = new User();
