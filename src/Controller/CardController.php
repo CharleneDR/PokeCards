@@ -36,7 +36,6 @@ class CardController extends AbstractController
             $rarities = $form->getData()['rarity'];
             $series = $form->getData()['series'];
 
-            // NOT WORKING, ALWAYS USE API
             $searchExist = $searchRepository->findOneBy(['name' => $name, 'type' => implode(', ', $types), 'rarity' => implode(', ', $rarities), 'series' => implode(', ' ,$series)]);
             if ($searchExist == false) {
                 $apiCards = $cardService->urlMaker($name, $types, $rarities, $series);

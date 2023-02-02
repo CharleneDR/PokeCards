@@ -5,68 +5,70 @@
 {% endblock %}
 
 {% block body %}
-	<div id='reducedDiv' class=''>
-		<div id='cardDetails' class="d-flex flex-row justify-content-center align-items-center">
-			<a href={{card.imageLarge}} id='{{card.apiId}}'><img class="me-4 my-4 shadow" src="{{card.imageLarge}}" alt="card image"></a>
-			<div id="details" class="rounded-4 bg-white ms-5 p-4 text-center d-flex flex-column justify-content-between align-items-center">
-				<div class="w-100">
-					<h2 class="word-wrap">{{card.name}}
-					</h2>
-					<div>Type:
-						{% if card.type|length == 1 %}
-							{{card.type[0]}}
-						{% else %}
-							{% for type in card.type %}
-								{{type}}
-								super
-							{% endfor %}
-						{% endif %}
+	<div id='reducedDiv'>
+		<div id='cardDetails' class="d-flex flex-column flex-md-row justify-content-center align-items-center m-4">
+			<a href={{card.imageLarge}} id='{{card.apiId}}'><img class="me-0 me-md-4 my-4 shadow" src=" {{card.imageLarge}} " alt=" card image"></a>
+			<div id="details" class="flex-wrap rounded-4 bg-white ms-md-5">
+				<img id='{{card.apiId}}' class="pokeball mt-1 mb-3 {% if app.user and app.user.isInCollection(card) %}{% else %}opacity{% endif %}" src="{{ asset('build/images/pokeball_filled.png') }}" alt="add to collection">
+				<div class="h-100 px-2 py-4 text-center d-flex flex-column justify-content-between align-items-center p-2">
+					<div class="w-100">
+						<h2 class="word-wrap">{{card.name}}
+						</h2>
+						<div>Type:
+							{% if card.type|length == 1 %}
+								{{card.type[0]}}
+							{% else %}
+								{% for type in card.type %}
+									{{type}}
+									super
+								{% endfor %}
+							{% endif %}
 
-					</div>
-					<div>{{card.supertype}}
-					</div>
-					<div>
-						{{card.series}}
-						({{card.number}}/{{card.totalSet}})
-					</div>
-				</div>
-
-				<div class="w-100">
-					{% if card.rarity is defined %}
-						Rarity:
-						{{card.rarity}}
-					{% endif %}
-					<div>Total printed:
-						{{card.printedTotal}}
-					</div>
-					{% if card.trendPrice is defined %}
-						<div>Trend price:
-							{{card.trendPrice}}€
 						</div>
-					{% endif %}
-				</div>
+						<div>{{card.supertype}}
+						</div>
+						<div>
+							{{card.series}}
+							({{card.number}}/{{card.totalSet}})
+						</div>
+					</div>
 
-				{% if card.artist is defined %}
-					<div>Illustrator:<br>
-						{{card.artist}}</div>
-				{% endif %}
-
-				<div class="w-100">
-					<a href="{{ path('app_redirectToSearch', {'name' : card.name }) }}">
-						<div>See other
-							{{card.name}}
-							cards</div>
-					</a>
-					{% if card.evolvesTo is defined and card.evolvesTo is not empty %}
-						<div>or</div>
-						<a href="{{ path('app_redirectToSearch', {'name' : card.evolvesTo }) }}">
-							<div>See evolution:
-								{{card.evolvesTo}}
+					<div class="w-100">
+						{% if card.rarity is defined %}
+							Rarity:
+							{{card.rarity}}
+						{% endif %}
+						<div>Total printed:
+							{{card.printedTotal}}
+						</div>
+						{% if card.trendPrice is defined %}
+							<div>Trend price:
+								{{card.trendPrice}}€
 							</div>
-						</a>
-					{% endif %}
-				</div>
+						{% endif %}
+					</div>
 
+					{% if card.artist is defined %}
+						<div>Illustrator:<br>
+							{{card.artist}}</div>
+					{% endif %}
+
+					<div class="w-100">
+						<a href="{{ path('app_redirectToSearch', {'name' : card.name }) }}">
+							<div>See other
+								{{card.name}}
+								cards</div>
+						</a>
+						{% if card.evolvesTo is defined and card.evolvesTo is not empty %}
+							<div>or</div>
+							<a href="{{ path('app_redirectToSearch', {'name' : card.evolvesTo }) }}">
+								<div>See evolution:
+									{{card.evolvesTo}}
+								</div>
+							</a>
+						{% endif %}
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
