@@ -19,14 +19,14 @@ class Search
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $name = null;
 
-    #[ORM\Column(type: Types::ARRAY, nullable: true)]
-    private array $type = [];
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $type = null;
 
-    #[ORM\Column(type: Types::ARRAY, nullable: true)]
-    private array $rarity = [];
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $rarity = null;
 
-    #[ORM\Column(type: Types::ARRAY, nullable: true)]
-    private array $series = [];
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $series = null;
 
     #[ORM\ManyToMany(targetEntity: Card::class, inversedBy: 'searches')]
     private Collection $cards;
@@ -53,36 +53,36 @@ class Search
         return $this;
     }
 
-    public function getType(): array
+    public function getType(): string
     {
         return $this->type;
     }
 
-    public function setType(?array $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
         return $this;
     }
 
-    public function getRarity(): array
+    public function getRarity(): string
     {
         return $this->rarity;
     }
 
-    public function setRarity(?array $rarity): self
+    public function setRarity(?string $rarity): self
     {
         $this->rarity = $rarity;
 
         return $this;
     }
 
-    public function getSeries(): array
+    public function getSeries(): string
     {
         return $this->series;
     }
 
-    public function setSeries(?array $series): self
+    public function setSeries(?string $series): self
     {
         $this->series = $series;
 

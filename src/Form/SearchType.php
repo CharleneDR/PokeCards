@@ -49,21 +49,21 @@ class SearchType extends AbstractType
 
             ->add('rarity', ChoiceType::class, [
                 'choices' => [
-                    "Amazing Rare" => "Amazing Rare",
+                    "Amazing Rare" => "Amazing",
                     "Common" => "Common",
                     "Legend" => "Legend",
                     "Promo" => "Promo",
                     "Rare" => "Rare",
-                    "Rare ACE" => "Rare ACE",
-                    "Rare BREAK" => "Rare BREAK",
-                    "Rare Holo" => "Rare Holo",
-                    "Rare Prime" => "Rare Prime",
-                    "Rare Prism Star" => "Rare Prism Star",
-                    "Rare Rainbow" => "Rare Rainbow",
-                    "Rare Secret" => "Rare Secret",
-                    "Rare Shining" => "Rare Shining",
-                    "Rare Shiny" => "Rare Shiny",
-                    "Rare Ultra" => "Rare Ultra",
+                    "Rare ACE" => "ACE",
+                    "Rare BREAK" => "BREAK",
+                    "Rare Holo" => "Holo",
+                    "Rare Prime" => "Prime",
+                    "Rare Prism Star" => "Prism",
+                    "Rare Rainbow" => "Rainbow",
+                    "Rare Secret" => "Secret",
+                    "Rare Shining" => "Shining",
+                    "Rare Shiny" => "Shiny",
+                    "Rare Ultra" => "Ultra",
                     "Uncommon" => "Uncommon"
                 ],
                 'multiple' => true,
@@ -107,12 +107,5 @@ class SearchType extends AbstractType
                 ],
                 'required' => false,
             ]);
-    }
-
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults([
-            'data_class' => Search::class,
-        ]);
     }
 }

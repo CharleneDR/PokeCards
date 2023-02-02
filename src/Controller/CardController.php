@@ -19,22 +19,28 @@ class CardController extends AbstractController
     #[Route('/', name: 'app_index')]
     public function index(Request $request, SearchRepository $searchRepository, CardRepository $cardRepository, CardService $cardService): Response
     {
-        $search = new Search();
-        $form = $this->createForm(SearchType::class, $search);
+        $form = $this->createForm(SearchType::class);
         $form->handleRequest($request);
         $cards = [];
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $name = $search->getName();
-            $types = $search->getType();
-            $rarities = $search->getRarity();
-            $series = $search->getSeries();
+            $name = $form->getData()['name'];
+            $types = $form->getData()['type'];
+            $rarities = $form->getData()['rarity'];
+            $series = $form->getData()['series'];
 
             // NOT WORKING, ALWAYS USE API
-            $searchExist = $searchRepository->findOneBy(['name' => $name, 'type' => $types, 'rarity' => $rarities, 'series' => $series]);
+            $searchExist = $searchRepository->findOneBy(['name' => $name, 'type' => implode(', ', $types), 'rarity' => implode(', ', $rarities), 'series' => implode(', ' ,$series)]);
             if ($searchExist == false) {
-                $apiCards = $cardService->urlMaker($search, $name, $types, $rarities, $series);
-                $cards = $cardService->cardSaver($apiCards, $search);
+                $apiCards = $cardService->urlMaker($name, $types, $rarities, $series);
+
+                $search = new Search();
+                $search->setName($name);
+                $search->setType(implode( ', ', $types));
+                $search->setRarity(implode(', ', $rarities));
+                $search->setSeries(implode(', ', $series));
+
+                $cards = $cardService->cardAndSearchSaver($apiCards, $search);
             } else {
                 $cards = $searchExist->getCards();
             }            

@@ -21,7 +21,7 @@ class CardService {
         $this->client = $client;
     }
 
-    public function urlMaker(Search $search, string $name, array $types, array $rarities, array $series): array|false
+    public function urlMaker(string $name = null, array $types, array $rarities, array $series): array|false
     {
         $url = 'https://api.pokemontcg.io/v2/cards/';
     
@@ -29,7 +29,7 @@ class CardService {
             $url .= '?q=';
 
             if ($name != null) {
-                $url .= 'name:' . $search->getName() . '* ';
+                $url .= 'name:' . $name . '* ';
             }
 
             if (!empty($types)) {
@@ -44,7 +44,7 @@ class CardService {
             if (!empty($rarities)) {
                 $url .= ' (';
                 foreach($rarities as $rarity) {
-                    $url .= 'rarity:' . $rarity . ' or ';
+                    $url .= 'rarity:*' . $rarity . '* or ';
                 }
                 $url = substr($url, 0, -4);
                 $url .= ') ';
@@ -67,7 +67,7 @@ class CardService {
         return $cards;
     }
 
-    public function cardSaver(array $apiCards, Search $search): array
+    public function cardAndSearchSaver(array $apiCards, Search $search): array
     {
         $cards = [];
         foreach ($apiCards as $card) {
@@ -108,6 +108,7 @@ class CardService {
                 $search->addCard($cardExist);
             }
         }
+
         $this->searchRepository->save($search, true);
         return $cards;
     }

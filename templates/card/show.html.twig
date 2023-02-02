@@ -48,10 +48,11 @@
 					{{card.artist}}</div>
 
 				<div class="w-100">
-					<div>See other card of
-						{{card.name}}</div>
-					<div>or</div>
-					{% if card.evolvesTo is defined %}
+					<div>See other
+						{{card.name}}
+						cards</div>
+					{% if card.evolvesTo is defined and card.evolvesTo is not empty %}
+						<div>or</div>
 						<div>See evolution:
 							{{card.evolvesTo}}
 						</div>
