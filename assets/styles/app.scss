@@ -189,7 +189,14 @@ nav {
         }
 
         input {
-            display: none;
+            display: initial;
+
+            &:checked+label {
+                background-color: $red;
+                border: 1px solid $black !important;
+                color: $white;
+                cursor: pointer;
+            }
         }
     }
 
@@ -215,12 +222,12 @@ nav {
     }
 }
 
-.checked {
+/*.checked {
     background-color: $red;
     border: 1px solid $black !important;
     color: $white;
     cursor: pointer;
-}
+}*/
 
 .opacity {
     opacity: 50%;
