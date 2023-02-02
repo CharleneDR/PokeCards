@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PokéCards - User index
+{% endblock %}
+
+{% block body %}
+	<div id='index' class="bg-white rounded-4 m-2 mt-5 p-4">
+
+		<h2 class="mb-4 text-center">User index</h2>
+		<div style='overflow-x:auto'>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Username</th>
+						<th>Admin</th>
+						<th>Email</th>
+						<th>Country</th>
+						<th>IsVerified</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for user in users %}
+						<tr>
+							<td>
+								<a href="{{ path('app_user_show', {'id' : user.id})}}">{{ user.id }}</a>
+							</td>
+							<td>
+								<a href="{{ path('app_user_show', {'id' : user.id})}}">{{ user.username }}</a>
+							</td>
+							<td>
+								<a href="{{ path('app_user_show', {'id' : user.id})}}">
+									{% if "ROLE_ADMIN" in user.roles %}yes
+									{% endif %}
+								</a>
+							</td>
+							<td>
+								<a href="{{ path('app_user_show', {'id' : user.id})}}">{{ user.email }}</a>
+							</td>
+							<td>
+								<a href="{{ path('app_user_show', {'id' : user.id})}}">{{ user.country }}</a>
+							</td>
+							<td>
+								<a href="{{ path('app_user_show', {'id' : user.id})}}">{{ user.isVerified ? 'Yes' : 'No' }}</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="6" class="text-center">No user found</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class='text-center mt-2'>
+		<a href="{{ path('app_user_new') }}">Create new</a>
+	</div>
+
+	<div id='indexCard' class="bg-white rounded-4 m-2 mt-5 p-4">
+
+		<h2 class="mb-4 text-center">Card index</h2>
+		<div style='overflow-x:auto'>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Api Id</th>
+						<th>Name</th>
+						<th>Series</th>
+						<th>Rarity</th>
+						<th>Trend Price</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for card in cards %}
+						<tr>
+							<td>
+								<a href="{{ path('app_show', {id : card.apiId}) }}">
+									{{ card.id }}</>
+							</td>
+
+							<td>
+								<a href="{{ path('app_show', {id : card.apiId}) }}">
+									{{ card.apiId }}<a/></td>
+							</td>
+							<td>
+								<a href="{{ path('app_show', {id : card.apiId}) }}">
+									{{ card.name }}</a>
+							</td>
+							<td>
+								<a href="{{ path('app_show', {id : card.apiId}) }}">
+									{{ card.series }}</a>
+							</td>
+
+							<td>
+								<a href="{{ path('app_show', {id : card.apiId}) }}">
+									{{ card.rarity }}</a>
+							</td>
+
+							<td>
+								<a href="{{ path('app_show', {id : card.apiId}) }}">
+									{{ card.trendPrice }}€</a>
+							</td>
+
+						</tr>
+
+					{% else %}
+						<tr>
+							<td colspan="6" class="text-center">No card found</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+{% endblock %}
