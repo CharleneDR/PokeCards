@@ -15,12 +15,15 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-
 class CardController extends AbstractController
 {
     #[Route('/', name: 'app_index')]
-    public function index(Request $request, SearchRepository $searchRepository, CardRepository $cardRepository, CardService $cardService): Response
-    {
+    public function index(
+        Request $request,
+        SearchRepository $searchRepository,
+        CardRepository $cardRepository,
+        CardService $cardService
+    ): Response {
         $form = $this->createForm(SearchType::class);
 
         $session = $request->getSession();
@@ -36,13 +39,20 @@ class CardController extends AbstractController
             $rarities = $form->getData()['rarity'];
             $series = $form->getData()['series'];
 
-            $searchExist = $searchRepository->findOneBy(['name' => $name, 'type' => implode(', ', $types), 'rarity' => implode(', ', $rarities), 'series' => implode(', ' ,$series)]);
+            $searchExist = $searchRepository->findOneBy(
+                [
+                    'name' => $name,
+                    'type' => implode(', ', $types),
+                    'rarity' => implode(', ', $rarities),
+                    'series' => implode(', ', $series)
+                ]
+            );
             if ($searchExist == false) {
                 $apiCards = $cardService->urlMaker($name, $types, $rarities, $series);
 
                 $search = new Search();
                 $search->setName($name);
-                $search->setType(implode( ', ', $types));
+                $search->setType(implode(', ', $types));
                 $search->setRarity(implode(', ', $rarities));
                 $search->setSeries(implode(', ', $series));
 

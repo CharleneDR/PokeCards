@@ -16,14 +16,17 @@ class ApiController extends AbstractController
 {
 
     #[Route('/addToCollection/{id}', name: 'app_api')]
-    public function addToCollection(HttpClientInterface $client, string $id, CardRepository $cardRepository, UserRepository $userRepository): Response
-    {
+    public function addToCollection(
+        HttpClientInterface $client,
+        string $id,
+        CardRepository $cardRepository,
+        UserRepository $userRepository
+    ): Response {
         $card = $cardRepository->findOneByApiId($id);
 
-        if($this->getUser()) {
-            if($card != false) {
-                if ($this->getUser()->isInCollection($card) == true)
-                {
+        if ($this->getUser()) {
+            if ($card != false) {
+                if ($this->getUser()->isInCollection($card) == true) {
                     $this->getUser()->removeCollection($card);
                 }
             } else {
@@ -35,24 +38,24 @@ class ApiController extends AbstractController
                 $card->setName($apiCard['name']);
                 $card->setImageLarge($apiCard['images']['large']);
                 $card->setImageSmall($apiCard['images']['small']);
-                if(isset($apiCard['types'])) {
+                if (isset($apiCard['types'])) {
                     $card->setType($apiCard['types']);
                 }
                 $card->setSupertype($apiCard['supertype']);
                 $card->setSeries($apiCard['set']['series']);
                 $card->setNumber($apiCard['number']);
                 $card->setTotalSet($apiCard['set']['total']);
-                if(isset($apiCard['rarity'])) {
+                if (isset($apiCard['rarity'])) {
                     $card->setRarity($apiCard['rarity']);
                 }
                 $card->setPrintedTotal($apiCard['set']['printedTotal']);
-                if(isset($apiCard['cardmarket']['prices']['trendPrice'])) {
+                if (isset($apiCard['cardmarket']['prices']['trendPrice'])) {
                     $card->setTrendPrice($apiCard['cardmarket']['prices']['trendPrice']);
                 }
-                if(isset($apiCard['artist'])) {
+                if (isset($apiCard['artist'])) {
                     $card->setArtist($apiCard['artist']);
                 }
-                if(isset($apiCard['evolvesTo'])) {
+                if (isset($apiCard['evolvesTo'])) {
                     $card->setEvolvesTo($apiCard['evolvesTo'][0]);
                 }
                 $cardRepository->save($card, true);

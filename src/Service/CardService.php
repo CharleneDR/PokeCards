@@ -8,14 +8,17 @@ use App\Repository\CardRepository;
 use App\Repository\SearchRepository;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class CardService {
-
+class CardService
+{
     private CardRepository $cardRepository;
     private SearchRepository $searchRepository;
     private HttpClientInterface $client;
 
-    public function __construct (CardRepository $cardRepository, SearchRepository $searchRepository, HttpClientInterface $client)
-    {
+    public function __construct(
+        CardRepository $cardRepository,
+        SearchRepository $searchRepository,
+        HttpClientInterface $client
+    ) {
         $this->cardRepository = $cardRepository;
         $this->searchRepository = $searchRepository;
         $this->client = $client;
@@ -34,7 +37,7 @@ class CardService {
 
             if (!empty($types)) {
                 $url .= ' (';
-                foreach($types as $type) {
+                foreach ($types as $type) {
                     $url .= 'types:' . $type . ' or ';
                 }
                 $url = substr($url, 0, -4);
@@ -43,7 +46,7 @@ class CardService {
 
             if (!empty($rarities)) {
                 $url .= ' (';
-                foreach($rarities as $rarity) {
+                foreach ($rarities as $rarity) {
                     $url .= 'rarity:*' . $rarity . '* or ';
                 }
                 $url = substr($url, 0, -4);
@@ -52,7 +55,7 @@ class CardService {
 
             if (!empty($series)) {
                 $url .= '(';
-                foreach($series as $serie) {
+                foreach ($series as $serie) {
                     $url .= 'set.id:' . $serie . '* or ';
                 }
                 $url = substr($url, 0, -4);
@@ -80,24 +83,24 @@ class CardService {
                 $newCard->setName($card['name']);
                 $newCard->setImageLarge($card['images']['large']);
                 $newCard->setImageSmall($card['images']['small']);
-                if(isset($card['types'])) {
+                if (isset($card['types'])) {
                     $newCard->setType($card['types']);
                 }
                 $newCard->setSupertype($card['supertype']);
                 $newCard->setSeries($card['set']['series']);
                 $newCard->setNumber($card['number']);
                 $newCard->setTotalSet($card['set']['total']);
-                if(isset($card['rarity'])) {
+                if (isset($card['rarity'])) {
                     $newCard->setRarity($card['rarity']);
                 }
                 $newCard->setPrintedTotal($card['set']['printedTotal']);
-                if(isset($card['cardmarket']['prices']['trendPrice'])) {
+                if (isset($card['cardmarket']['prices']['trendPrice'])) {
                     $newCard->setTrendPrice($card['cardmarket']['prices']['trendPrice']);
                 }
-                if(isset($card['artist'])) {
+                if (isset($card['artist'])) {
                     $newCard->setArtist($card['artist']);
                 }
-                if(isset($card['evolvesTo'])) {
+                if (isset($card['evolvesTo'])) {
                     $newCard->setEvolvesTo($card['evolvesTo'][0]);
                 }
 
