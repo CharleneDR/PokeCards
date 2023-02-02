@@ -57,7 +57,7 @@ class UserController extends AbstractController
     public function edit(Request $request, User $user, UserRepository $userRepository): Response
     {
         $userConnected = $this->getUser();
-        if($userConnected && (in_array('ROLE_ADMIN', $userConnected->getRoles()) || $userConnected == $user)){
+        if ($userConnected && (in_array('ROLE_ADMIN', $userConnected->getRoles()) || $userConnected == $user)) {
             $form = $this->createForm(UserType::class, $user);
             $form->handleRequest($request);
 
@@ -81,7 +81,7 @@ class UserController extends AbstractController
     public function delete(Request $request, User $user, UserRepository $userRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
-            if($this->getUser() != $user) {
+            if ($this->getUser() != $user) {
                 $userRepository->remove($user, true);
             } else {
                 $this->addFlash('red', "You can't delete your own account");
