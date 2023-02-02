@@ -103,17 +103,33 @@ nav {
         left: 50%;
         transform: translate(-50%, -50%);
 
-        img {
+        .logoDesktop {
             width: auto;
             height: 150px;
         }
     }
 
+    #logoMob {
+        .logoMobile {
+            width: 100%;
+        }
+    }
+
     .links {
-        width: 222px;
+        width: 100%;
+        max-width: 222px;
 
         img {
             width: 40px;
+            height: auto;
+        }
+    }
+
+    .linksMob {
+        width: 90%;
+
+        img {
+            width: 30px;
             height: auto;
         }
     }
@@ -206,11 +222,15 @@ nav {
     @include form-style;
 
     input {
-        width: 50%;
+        width: 100%;
         min-width: 28Opx;
         font-size: 14px;
         text-align: center;
         color: black;
+    }
+
+    form {
+        min-width: 310px;
     }
 }
 
@@ -220,7 +240,7 @@ nav {
 
     input,
     select {
-        width: 50%;
+        width: 100%;
         min-width: 28Opx;
         font-size: 14px;
         text-align: center;
@@ -235,5 +255,9 @@ nav {
             color: $red;
             padding-top: 0.5rem;
         }
+    }
+
+    form {
+        max-width: 310px;
     }
 }

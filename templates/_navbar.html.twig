@@ -1,35 +1,81 @@
-<nav class="w-100 d-none d-md-flex">
-	<div id="logo">
-		<a href="{{ path('app_index') }}"><img class="my-3" src="{{ asset('build/images/pokecards.png') }}" alt="logo PokeCards"></a>
-	</div>
-	<div class="d-flex justify-content-between align-items-center h-100 w-100 mx-5 px-1">
-		{% if app.user %}
-			<a href="{{ path('app_logout') }}">
-				<div class="links shadow rounded-4 p-1 mx-4 d-flex flex-column justify-content-center align-items-center">
-					<img src="{{ asset('build/images/pokeball_filled.png') }}">
-					<div class="pt-2 px-3">
-						Log out
+<nav class="w-100">
+	<div class="d-none d-md-flex w-100 h-100">
+		<div id="logo">
+			<a href="{{ path('app_index') }}"><img class="my-3 logoDesktop" src="{{ asset('build/images/pokecards.png') }}" alt="logo PokeCards"></a>
+		</div>
+		<div class="d-flex justify-content-between align-items-center h-100 w-100 mx-5 px-1">
+			{% if app.user %}
+				<a href="{{ path('app_logout') }}">
+					<div class="links shadow rounded-4 p-1 mx-4 d-flex flex-column justify-content-center align-items-center">
+						<img src="{{ asset('build/images/pokeball_filled.png') }}">
+						<div class="pt-2 px-3">
+							Log out
+						</div>
 					</div>
-				</div>
-			</a>
-		{% else %}
-			<a href="{{ path('app_login') }}">
-				<div class="links shadow rounded-4 p-1 mx-4 d-flex flex-column justify-content-center align-items-center">
-					<img src="{{ asset('build/images/pokeball_filled.png') }}">
-					<div class="pt-2 px-3">
-						Log in
+				</a>
+			{% else %}
+				<a href="{{ path('app_login') }}">
+					<div class="links shadow rounded-4 p-1 mx-4 d-flex flex-column justify-content-center align-items-center">
+						<img src="{{ asset('build/images/pokeball_filled.png') }}">
+						<div class="pt-2 px-3">
+							Log in
+						</div>
 					</div>
-				</div>
-			</a>
-		{% endif %}
+				</a>
+			{% endif %}
 
-		{% if app.user %}
-			<a href="{{ path('app_user_show', {'id' : app.user.id})}}">
-				<div class="links shadow rounded-4 p-1 mx-4 d-flex flex-column justify-content-center align-items-center">
-					<img class="pokeball" src="{{ asset('build/images/pokeball_filled.png') }}">
-					<div class="pt-2 px-3">My collection</div>
-				</div>
-			</a>
-		{% endif %}
+			{% if app.user %}
+				<a href="{{ path('app_user_show', {'id' : app.user.id})}}">
+					<div class="links shadow rounded-4 p-1 mx-4 d-flex flex-column justify-content-center align-items-center">
+						<img class="pokeball" src="{{ asset('build/images/pokeball_filled.png') }}">
+						<div class="pt-2 px-3">My collection</div>
+					</div>
+				</a>
+			{% endif %}
+		</div>
 	</div>
+
+	<div class="d-flex d-md-none w-100 h-100">
+		<div class="d-flex flex-column justify-content-start align-items-center h-100 w-100">
+			<div id="logoMob" class="px-4">
+				<a href="{{ path('app_index') }}"><img class="my-3 logoMobile" src="{{ asset('build/images/pokecards.png') }}" alt="logo PokeCards"></a>
+			</div>
+			{% if app.user %}
+				<div class="w-100">
+					<a href="{{ path('app_logout') }}">
+						<div class="linksMob shadow rounded-4 p-1 mb-2 mx-4 d-flex flex-row justify-content-center align-items-center">
+							<img src="{{ asset('build/images/pokeball_filled.png') }}">
+							<div class="pt-2 px-3">
+								Log out
+							</div>
+						</div>
+					</a>
+				</div>
+			{% else %}
+				<div class="w-100">
+					<a href="{{ path('app_login') }}">
+						<div class="linksMob shadow rounded-4 p-1 mx-4 d-flex flex-row justify-content-center align-items-center">
+							<img src="{{ asset('build/images/pokeball_filled.png') }}">
+							<div class="pt-2 px-3">
+								Log in
+							</div>
+						</div>
+					</a>
+				</div>
+			{% endif %}
+
+			{% if app.user %}
+				<div class="w-100">
+					<a href="{{ path('app_user_show', {'id' : app.user.id})}}">
+						<div class="linksMob shadow rounded-4 p-1 mx-4 d-flex flex-row justify-content-center align-items-center">
+							<img class="pokeball" src="{{ asset('build/images/pokeball_filled.png') }}">
+							<div class="pt-2 px-3">My collection</div>
+						</div>
+					</a>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+
+
 </nav>
