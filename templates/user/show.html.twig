@@ -13,7 +13,7 @@
 					<div class="mb-2">{{user.email}}</div>
 				{% endif %}
 
-				<div class="mb-4">{{user.country}}</div>
+				<div class="mb-4">{{ user.country | country_name }}</div>
 				<div class="word-wrap mb-2">Collection size :
 					{{user.collection|length}}
 					{% if user.collection|length >1 %}

@@ -135,7 +135,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getCountry(): ?string
     {
         if ($this->country) {
-            return Countries::getName($this->country);
+            return $this->country;
         }
         return false;
     }

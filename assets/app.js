@@ -67,8 +67,18 @@ if (pokeballs) {
 
 // ADD OPTION TO COUNTRY TYPE FIELD
 let country = document.getElementById('registration_form_country')
+let countryBis = document.getElementById('user_country')
 
 if (country) {
+    let option = document.createElement("option");
+    option.value = ""
+    option.text = ""
+    option.disabled = true
+    option.selected = true
+    country.add(option)
+}
+
+if (countryBis) {
     let option = document.createElement("option");
     option.value = ""
     option.text = ""
