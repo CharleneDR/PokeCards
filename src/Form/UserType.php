@@ -35,7 +35,8 @@ class UserType extends AbstractType
             'label' => 'Country',
             'attr' => [
                 'class' => 'form-control m-auto',
-            ]
+            ],
+            'choice_translation_domain' => 'EN',
         ]);
     }
 

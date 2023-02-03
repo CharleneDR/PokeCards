@@ -28,6 +28,8 @@ class ApiController extends AbstractController
             if ($card != false) {
                 if ($this->getUser()->isInCollection($card) == true) {
                     $this->getUser()->removeCollection($card);
+                } else {
+                    $this->getUser()->addCollection($card);
                 }
             } else {
                 $response = $client->request('GET', 'https://api.pokemontcg.io/v2/cards/' . $id);
@@ -59,8 +61,8 @@ class ApiController extends AbstractController
                     $card->setEvolvesTo($apiCard['evolvesTo'][0]);
                 }
                 $cardRepository->save($card, true);
+                $this->getUser()->addCollection($card);
             }
-            $this->getUser()->addCollection($card);
 
             $userRepository->save($this->getUser(), true);
 

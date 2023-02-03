@@ -67,6 +67,7 @@ if (pokeballs) {
 
 // ADD OPTION TO COUNTRY TYPE FIELD
 let country = document.getElementById('registration_form_country')
+let countryBis = document.getElementById('user_country')
 
 if (country) {
     let option = document.createElement("option");
@@ -75,4 +76,27 @@ if (country) {
     option.disabled = true
     option.selected = true
     country.add(option)
+}
+
+if (countryBis) {
+    let option = document.createElement("option");
+    option.value = ""
+    option.text = ""
+    option.disabled = true
+    option.selected = true
+    country.add(option)
+}
+
+
+// SCROLL TO TOP BUTTON
+let mybutton = document.getElementById("topButtonDiv");
+
+window.onscroll = function () { scrollFunction() };
+
+function scrollFunction() {
+    if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
+        mybutton.style.display = "flex";
+    } else {
+        mybutton.style.display = "none";
+    }
 }
