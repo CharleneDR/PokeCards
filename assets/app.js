@@ -86,3 +86,17 @@ if (countryBis) {
     option.selected = true
     country.add(option)
 }
+
+
+// SCROLL TO TOP BUTTON
+let mybutton = document.getElementById("topButtonDiv");
+
+window.onscroll = function () { scrollFunction() };
+
+function scrollFunction() {
+    if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
+        mybutton.style.display = "flex";
+    } else {
+        mybutton.style.display = "none";
+    }
+}
