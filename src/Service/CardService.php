@@ -18,14 +18,12 @@ class CardService
     public function __construct(
         CardRepository $cardRepository,
         SearchRepository $searchRepository,
-        HttpClientInterface $client
     ) {
         $this->cardRepository = $cardRepository;
         $this->searchRepository = $searchRepository;
-        $this->client = $client;
     }
 
-    public function urlMaker(string $name = null, array $types, array $rarities, array $series): array|false
+    public function urlMaker(string $name = null, array $types, array $rarities, array $series): string
     {
         $url = 'https://api.pokemontcg.io/v2/cards/';
     
@@ -65,18 +63,15 @@ class CardService
             
             $url .= '&orderBy=set.series';
         }
-        $response = $this->client->request('GET', $url);
-        $cards = $response->toArray()['data'];
         
-        return $cards;
+        return $url;
     }
 
-    public function cardAndSearchSaver(array $apiCards, Search $search): array
+    public function cardSaver(array $apiCards): array
     {
         $cards = [];
         foreach ($apiCards as $card) {
             $cardExist = $this->cardRepository->findOneBy(['apiId' => $card['id']]);
-            $cards[] = $cardExist;
 
             if ($cardExist == false) {
                 $newCard = new Card();
@@ -107,13 +102,11 @@ class CardService
 
                 $cards[] = $newCard;
                 $this->cardRepository->save($newCard, true);
-                $search->addCard($newCard);
             } else {
-                $search->addCard($cardExist);
+                $cards[] = $cardExist;
             }
         }
 
-        $this->searchRepository->save($search, true);
         return $cards;
     }
 
