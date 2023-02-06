@@ -22,7 +22,8 @@ class CardController extends AbstractController
         Request $request,
         SearchRepository $searchRepository,
         CardRepository $cardRepository,
-        CardService $cardService
+        CardService $cardService,
+        HttpClientInterface $client
     ): Response {
         $form = $this->createForm(SearchType::class);
 
@@ -48,15 +49,21 @@ class CardController extends AbstractController
                 ]
             );
             if ($searchExist == false) {
-                $apiCards = $cardService->urlMaker($name, $types, $rarities, $series);
-
+                $url = $cardService->urlMaker($name, $types, $rarities, $series);
+                $response = $client->request('GET', $url);
+                $apiCards = $response->toArray()['data'];
+        
                 $search = new Search();
                 $search->setName($name);
                 $search->setType(implode(', ', $types));
                 $search->setRarity(implode(', ', $rarities));
                 $search->setSeries(implode(', ', $series));
 
-                $cards = $cardService->cardAndSearchSaver($apiCards, $search);
+                $cards = $cardService->cardSaver($apiCards, $search);
+                foreach($cards as $card){
+                    $search->addCard($card);
+                }
+                $searchRepository->save($search, true);
             } else {
                 $cards = $searchExist->getCards();
             }            
